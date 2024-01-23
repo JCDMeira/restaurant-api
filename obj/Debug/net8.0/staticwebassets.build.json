@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BsPLHU09IP+PnVNHnEmBfXZ4jBJVusAq3MnyQLJtrlY=",
+  "Source": "restaurant-api",
+  "BasePath": "_content/restaurant-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
