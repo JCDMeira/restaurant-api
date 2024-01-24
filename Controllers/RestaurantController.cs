@@ -16,7 +16,18 @@ namespace books_api.Controllers
 
         [HttpGet]
         public async Task<List<Restaurant>> Get() =>
-       await _restaurantService.GetAsync();
+        await _restaurantService.GetAsync();
+
+        [HttpGet("{id:length(24)}")]
+        public async Task<ActionResult<Restaurant>> Get(string id)
+        {
+            var restaurant = await _restaurantService.GetAsync(id);
+
+            if (restaurant is null)
+                return NotFound();
+
+            return restaurant;
+        }
 
         [HttpPost]
         public async Task<IActionResult> Post(Restaurant newBook)
