@@ -37,5 +37,20 @@ namespace books_api.Controllers
             return CreatedAtAction(nameof(Get), new { id = newBook.Id }, newBook);
         }
 
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Restaurant updatedRestaurant)
+        {
+            var restaurant = await _restaurantService.GetAsync(id);
+
+            if (restaurant is null)
+                return NotFound();
+
+            updatedRestaurant.Id = restaurant.Id;
+            updatedRestaurant.Updated_time = DateTime.Now;
+
+            await _restaurantService.UpdateAsync(id, updatedRestaurant);
+
+            return NoContent();
+        }
     }
 }
