@@ -52,5 +52,18 @@ namespace books_api.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var restaurant = await _restaurantService.GetAsync(id);
+
+            if (restaurant is null)
+                return NotFound();
+
+            await _restaurantService.RemoveAsync(id);
+
+            return NoContent();
+        }
     }
 }
