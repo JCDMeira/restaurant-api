@@ -14,6 +14,11 @@ public class Restaurant
     [MinLength(10)]
     public string Name { get; set; } = null!;
 
+    [Range(0,24)]
+    public int Open_hour { get; set; }
+
+    [Range(0, 24)]
+    public int Close_hour { get; set; } 
 
     public DateTime? Created_time { get; } = DateTime.Now!;
 
