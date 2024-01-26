@@ -2,7 +2,7 @@
 using RestaurantApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace books_api.Controllers
+namespace RestaurantApi.Controllers
 {
     [Route("/api/restaurants")]
     [ApiController]

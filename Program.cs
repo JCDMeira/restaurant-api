@@ -1,12 +1,17 @@
 using RestaurantApi.Services;
 using RestaurantApi.Models;
+using restaurant_api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.Configure<RestaurantDatabaseSettings>(
     builder.Configuration.GetSection("RestaurantDatabase"));
-builder.Services.AddSingleton<RestaurantService>();
+builder.Services.AddTransient<RestaurantService>();
+
+builder.Services.Configure<CategoriesDatabaseSettings>(
+    builder.Configuration.GetSection("CategoriesDatabase"));
+builder.Services.AddTransient<CategoriesService>();
 
 // comando para instalar o mongo => dotnet add packag MongoDB.driver
 

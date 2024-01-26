@@ -1,10 +1,8 @@
-﻿namespace RestaurantApi.Models;
+﻿using restaurant_api.Models;
 
-public class RestaurantDatabaseSettings
+namespace RestaurantApi.Models;
+
+public class RestaurantDatabaseSettings : MongoBaseToDatabaseSettings
 {
-    public string ConnectionString { get; set; } = null!;
-
-    public string DatabaseName { get; set; } = null!;
-
     public string RestaurantsCollectionName { get; set; } = null!;
 }

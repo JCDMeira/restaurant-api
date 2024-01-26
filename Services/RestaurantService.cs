@@ -27,11 +27,11 @@ public class RestaurantService
     public async Task<Restaurant?> GetAsync(string id) =>
         await _restaurantsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(Restaurant newBook) =>
-        await _restaurantsCollection.InsertOneAsync(newBook);
+    public async Task CreateAsync(Restaurant newRestaurant) =>
+        await _restaurantsCollection.InsertOneAsync(newRestaurant);
 
-    public async Task UpdateAsync(string id, Restaurant updatedBook) =>
-        await _restaurantsCollection.ReplaceOneAsync(x => x.Id == id, updatedBook);
+    public async Task UpdateAsync(string id, Restaurant updatedRestaurant) =>
+        await _restaurantsCollection.ReplaceOneAsync(x => x.Id == id, updatedRestaurant);
 
     public async Task RemoveAsync(string id) =>
         await _restaurantsCollection.DeleteOneAsync(x => x.Id == id);
