@@ -46,7 +46,7 @@ namespace books_api.Controllers
                 return NotFound();
 
             updatedRestaurant.Id = restaurant.Id;
-            updatedRestaurant.Updated_time = DateTime.Now;
+            updatedRestaurant.UpdatedTime = DateTime.Now;
 
             await _restaurantService.UpdateAsync(id, updatedRestaurant);
 
