@@ -10,9 +10,7 @@ public class Restaurant : MongoBaseEntity
     [MinLength(10)]
     public string Name { get; set; } = null!;
 
-    [Range(0,24)]
-    public int OpenHour { get; set; }
+    public string OpenHour { get; set; } = null!;
 
-    [Range(0, 24)]
-    public int CloseHour { get; set; } 
+    public string CloseHour { get; set; } = null!;
 }
