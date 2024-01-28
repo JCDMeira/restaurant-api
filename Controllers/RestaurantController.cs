@@ -47,6 +47,11 @@ namespace RestaurantApi.Controllers
             if (category is null)
                 return BadRequest();
 
+            var restaurant = await _restaurantService.GetByNameAsync(newRestaurant.Name);
+
+            if (restaurant != null)
+                return BadRequest();
+
             await _restaurantService.CreateAsync(newRestaurant);
 
             return CreatedAtAction(nameof(Get), new { id = newRestaurant.Id }, newRestaurant);

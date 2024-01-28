@@ -28,6 +28,9 @@ public class CategoriesService
     public async Task<Category?> GetAsync(string id) =>
         await _categoriesCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+    public async Task<Category?> GetByNameAsync(string name) =>
+     await _categoriesCollection.Find(x => x.Name == name).FirstOrDefaultAsync();
+
     public async Task CreateAsync(Category newCategory) =>
         await _categoriesCollection.InsertOneAsync(newCategory);
 

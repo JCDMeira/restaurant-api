@@ -32,6 +32,11 @@ namespace RestaurantApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Category newCategory)
         {
+            var category = await _categoriesController.GetByNameAsync(newCategory.Name);
+
+            if (category != null)
+                return BadRequest();
+
             await _categoriesController.CreateAsync(newCategory);
 
             return CreatedAtAction(nameof(Get), new { id = newCategory.Id }, newCategory);

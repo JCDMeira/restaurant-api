@@ -27,6 +27,8 @@ public class RestaurantService
     public async Task<Restaurant?> GetAsync(string id) =>
         await _restaurantsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+    public async Task<Restaurant?> GetByNameAsync(string name) =>
+     await _restaurantsCollection.Find(x => x.Name == name).FirstOrDefaultAsync();
     public async Task CreateAsync(Restaurant newRestaurant) =>
         await _restaurantsCollection.InsertOneAsync(newRestaurant);
 
