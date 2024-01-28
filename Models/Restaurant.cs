@@ -6,6 +6,7 @@ namespace RestaurantApi.Models;
 
 public class Restaurant : MongoBaseEntity
 {
+    // tem como caracterizar como unique pelo mongo ?
     [BsonElement("Name")]
     [MinLength(10)]
     public string Name { get; set; } = null!;
