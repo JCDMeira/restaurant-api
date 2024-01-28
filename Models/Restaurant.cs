@@ -14,4 +14,7 @@ public class Restaurant : MongoBaseEntity
     public string OpenHour { get; set; } = null!;
 
     public string CloseHour { get; set; } = null!;
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string CategoryId { get; set; } = null!;
 }

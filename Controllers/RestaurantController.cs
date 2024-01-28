@@ -1,7 +1,6 @@
 ﻿using RestaurantApi.Models;
 using RestaurantApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.RegularExpressions;
 using restaurant_api.Utils;
 
 namespace RestaurantApi.Controllers
@@ -11,10 +10,13 @@ namespace RestaurantApi.Controllers
     public class RestaurantController : Controller
     {
         private readonly RestaurantService _restaurantService;
+        private readonly CategoriesService _categoriesController;
 
-        public RestaurantController(RestaurantService restauranService) =>
+        public RestaurantController(RestaurantService restauranService, CategoriesService categoriesService)
+        {
             _restaurantService = restauranService;
-
+            _categoriesController = categoriesService;
+        }
 
         [HttpGet]
         public async Task<List<Restaurant>> Get() =>
@@ -39,6 +41,11 @@ namespace RestaurantApi.Controllers
             bool isValidCloseHour = validadeHourFormat.IsValid(newRestaurant.CloseHour);
 
             if (!isValidOpenHour || !isValidCloseHour) return BadRequest();
+
+            var category = await _categoriesController.GetAsync(newRestaurant.CategoryId);
+
+            if (category is null)
+                return BadRequest();
 
             await _restaurantService.CreateAsync(newRestaurant);
 

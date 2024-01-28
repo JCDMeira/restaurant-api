@@ -21,12 +21,12 @@ namespace RestaurantApi.Controllers
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Category>> Get(string id)
         {
-            var restaurant = await _categoriesController.GetAsync(id);
+            var category = await _categoriesController.GetAsync(id);
 
-            if (restaurant is null)
+            if (category is null)
                 return NotFound();
 
-            return restaurant;
+            return category;
         }
 
         [HttpPost]
