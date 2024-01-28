@@ -52,6 +52,8 @@ namespace RestaurantApi.Controllers
             if (restaurant != null)
                 return BadRequest();
 
+            newRestaurant.Category = category;
+
             await _restaurantService.CreateAsync(newRestaurant);
 
             return CreatedAtAction(nameof(Get), new { id = newRestaurant.Id }, newRestaurant);
@@ -77,6 +79,7 @@ namespace RestaurantApi.Controllers
 
             updatedRestaurant.Id = restaurant.Id;
             updatedRestaurant.UpdatedTime = DateTime.Now;
+            updatedRestaurant.Category = category;
 
             await _restaurantService.UpdateAsync(id, updatedRestaurant);
 

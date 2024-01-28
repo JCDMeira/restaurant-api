@@ -17,4 +17,6 @@ public class Restaurant : MongoBaseEntity
 
     [BsonRepresentation(BsonType.ObjectId)]
     public string CategoryId { get; set; } = null!;
+
+    public Category? Category { get; set; } = null!;
 }
