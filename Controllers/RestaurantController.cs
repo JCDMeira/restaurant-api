@@ -65,6 +65,16 @@ namespace RestaurantApi.Controllers
             if (restaurant is null)
                 return NotFound();
 
+            var category = await _categoriesController.GetAsync(updatedRestaurant.CategoryId);
+
+            if (category is null)
+                return BadRequest();
+
+            var restaurantByName = await _restaurantService.GetByNameAsync(updatedRestaurant.Name);
+
+            if (restaurantByName != null)
+                return BadRequest();
+
             updatedRestaurant.Id = restaurant.Id;
             updatedRestaurant.UpdatedTime = DateTime.Now;
 
@@ -85,5 +95,7 @@ namespace RestaurantApi.Controllers
 
             return NoContent();
         }
+
+       
     }
 }

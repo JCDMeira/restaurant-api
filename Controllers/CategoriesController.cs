@@ -45,12 +45,17 @@ namespace RestaurantApi.Controllers
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, Category updatedCategory)
         {
-            var restaurant = await _categoriesController.GetAsync(id);
+            var category = await _categoriesController.GetAsync(id);
 
-            if (restaurant is null)
+            if (category is null)
                 return NotFound();
 
-            updatedCategory.Id = restaurant.Id;
+            var categoryByName = await _categoriesController.GetByNameAsync(updatedCategory.Name);
+
+            if (categoryByName != null)
+                return BadRequest();
+
+            updatedCategory.Id = category.Id;
             updatedCategory.UpdatedTime = DateTime.Now;
 
             await _categoriesController.UpdateAsync(id, updatedCategory);
