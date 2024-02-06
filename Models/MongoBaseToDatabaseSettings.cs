@@ -8,3 +8,5 @@
 
     }
 }
+
+//acho que só precisa de uma DatabaseSettings, se a chave para CollectionName for a mesma para ambos, diferenciando apenas o valor
