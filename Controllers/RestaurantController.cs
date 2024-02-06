@@ -27,8 +27,8 @@ namespace RestaurantApi.Controllers
 
             return restaurants
                 .Where(r => 
-                    RestaurantFilters.hasSameCategory( r.CategoryId, categoryId) && 
-                    RestaurantFilters.hasSearchString(r.Name, name))
+                    RestaurantFilters.HasSameCategory( r.CategoryId, categoryId) && 
+                    RestaurantFilters.HasSearchString(r.Name, name))
                 .ToList();
         }
 
