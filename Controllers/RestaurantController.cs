@@ -2,6 +2,7 @@
 using RestaurantApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using restaurant_api.Utils;
+using System.Text.RegularExpressions;
 
 namespace RestaurantApi.Controllers
 {
@@ -11,6 +12,12 @@ namespace RestaurantApi.Controllers
     {
         private readonly RestaurantService _restaurantService;
         private readonly CategoriesService _categoriesController;
+        private bool hasSameCategory(string categoryId, string? compId) => String.IsNullOrEmpty(compId) ? true : categoryId == compId;
+        private bool hasSearchString(string name, string? searchString) {
+            if(searchString == null) return true;
+            var regex = new Regex($"{searchString}", RegexOptions.IgnoreCase);
+            return regex.IsMatch(name);
+        }
 
         public RestaurantController(RestaurantService restauranService, CategoriesService categoriesService)
         {
@@ -19,8 +26,14 @@ namespace RestaurantApi.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Restaurant>> Get() =>
-        await _restaurantService.GetAsync();
+        public async Task<List<Restaurant>> Get([FromQuery] string? name, [FromQuery] string? categoryId) {
+            List < Restaurant > restaurants = await _restaurantService.GetAsync();
+
+
+            return restaurants
+                .Where(r => hasSameCategory( r.CategoryId, categoryId) && hasSearchString(r.Name, name))
+                .ToList();
+        }
 
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<Restaurant>> Get(string id)
