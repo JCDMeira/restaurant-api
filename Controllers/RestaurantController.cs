@@ -20,7 +20,7 @@ namespace RestaurantApi.Controllers
             _categoriesController = categoriesService;
         }
 
-        [HttpGet)]
+        [HttpGet]
         public async Task<List<Restaurant>> Get([FromQuery] string? name, [FromQuery] string? categoryId) {
             List < Restaurant > restaurants = await _restaurantService.GetAsync();
 
